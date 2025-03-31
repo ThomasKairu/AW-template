@@ -63,14 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Highlight active nav link based on scroll position ---
     const sections = document.querySelectorAll('section[id]');
-    const navLinksMain = document.querySelectorAll('.main-nav a');
+    const navLinks = document.querySelectorAll('.main-nav a');
 
     function highlightActiveNavLink() {
         let index = sections.length;
 
         while(--index && window.scrollY + 100 < sections[index].offsetTop) {} // 100 is an offset threshold
 
-        navLinksMain.forEach((link) => link.classList.remove('active'));
+        navLinks.forEach((link) => link.classList.remove('active'));
         // Check if a corresponding link exists before trying to add the class
         let activeLink = document.querySelector(`.main-nav a[href="#${sections[index].id}"]`);
         if(activeLink) {
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Highlight contact if scrolled to the very bottom
             let contactLink = document.querySelector('.main-nav a[href="#contact"]');
             if(contactLink) {
-                navLinksMain.forEach((link) => link.classList.remove('active')); // Remove from others first
+                navLinks.forEach((link) => link.classList.remove('active')); // Remove from others first
                 contactLink.classList.add('active');
             }
         }
