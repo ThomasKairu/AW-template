@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Academic Writing Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Header Styles */
+        .site-header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.25rem 0;
+        }
+        
+        .header-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .logo-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #4a6bdf;
+            letter-spacing: -0.5px;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: color 0.3s ease;
+            padding: 0.75rem 0;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #4a6bdf;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #4a6bdf;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .contact-link {
+            background-color: #4a6bdf;
+            color: white !important;
+            padding: 0.75rem 1.25rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            background-color: #3a56b5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(74, 107, 223, 0.2);
+        }
+        
+        .contact-link:after {
+            display: none;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: #333;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                background-color: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 1.5rem 0;
+                transition: left 0.3s ease;
+                z-index: 999;
+            }
+            
+            .main-nav.active {
+                left: 0;
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.25rem;
+            }
+            
+            .mobile-menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .mobile-menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .mobile-menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+        
+        /* Hero Section Styles */
+        .hero-section {
+            position: relative;
+            height: 80vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            color: white;
+            background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        .hero-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background-color: #4a6bdf;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a56b5;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-wrapper">
+            <div class="logo">
+                <a href="#" class="logo-link">
+                    <span class="logo-text">Academic Portfolio</span>
+                </a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                    <li class="nav-item"><a href="#what-is" class="nav-link">About Writing</a></li>
+                    <li class="nav-item"><a href="#how-to" class="nav-link">Writing Process</a></li>
+                    <li class="nav-item"><a href="#faqs" class="nav-link">FAQs</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link contact-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Academic Writing Portfolio</h1>
+                    <p>Showcasing expertise in academic research, writing, and analysis across various disciplines.</p>
+                    <a href="#portfolio" class="btn btn-primary">View My Work</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Table of Contents -->
+        <nav id="toc" class="table-of-contents">
+            <div class="container">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#portfolio">📄 Sample Work</a></li>
+                    <li><a href="#what-is">❓ What Is Academic Writing?</a></li>
+                    <li><a href="#types">📚 Types of Academic Papers</a></li>
+                    <li><a href="#how-to">✍️ How to Write an Academic Paper: 9 Steps</a></li>
+                    <li><a href="#structure">🏗️ Academic Paper Structure</a></li>
+                    <li><a href="#formatting">📋 Formatting Styles (APA/MLA)</a></li>
+                    <li><a href="#faqs">💡 Academic Paper FAQs</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="portfolio-section content-section">
+            <div class="container">
+                <h2>📄 Sample Work</h2>
+                <p>Here are examples of academic papers I have worked on. Click to view the documents.</p>
+                <div class="portfolio-grid">
+                    <!-- Add your samples here -->
+                    <!-- Sample Item 1 -->
+                    <article class="portfolio-item">
+                        <h3>Literary Analysis Essay</h3>
+                        <p>An analysis of symbolism in F. Scott Fitzgerald's 'The Great Gatsby'. (MLA Style)</p>
+                        <a href="https://drive.google.com/drive/folders/1TKyjg5C2Jf8KEhy-nbAXiX5KRUpRdp85?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn">View Document</a>
+                    </article>
+                    <!-- Sample Item 2 -->
+                    <article class="portfolio-item">
+                        <h3>Psychology Research Paper</h3>
+                        <p>Investigating the effects of social media on adolescent self-esteem. (APA Style)</p>
+                        <a href="https://drive.google.com/drive/folders/1TKyjg5C2Jf8KEhy-nbAXiX5KRUpRdp85?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn">View Document</a>
+                    </article>
+                     <!-- Sample Item 3 -->
+                     <article class="portfolio-item">
+                        <h3>History Essay: The Cold War</h3>
+                        <p>Examining the primary causes and key events of the Cold War. (Chicago Style)</p>
+                        <a href="https://drive.google.com/drive/folders/1TKyjg5C2Jf8KEhy-nbAXiX5KRUpRdp85?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn">View Document</a>
+                    </article>
+                    <!-- Add more portfolio items as needed -->
+                     <article class="portfolio-item">
+                        <h3>Business Case Study</h3>
+                        <p>Analysis of marketing strategies for a tech startup. (Harvard Style)</p>
+                        <a href="https://drive.google.com/drive/folders/1TKyjg5C2Jf8KEhy-nbAXiX5KRUpRdp85?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn">View Document</a>
+                    </article>
+                    <article class="portfolio-item">
+                        <h3>Sociology Report</h3>
+                        <p>Report on urban development trends and community impact. (ASA Style)</p>
+                         <a href="https://drive.google.com/drive/folders/1TKyjg5C2Jf8KEhy-nbAXiX5KRUpRdp85?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn">View Document</a>
+                    </article>
+                    <article class="portfolio-item">
+                        <h3>Critical Writing: Film Analysis</h3>
+                        <p>A critical review and analysis of cinematography in 'Parasite'.</p>
+                         <a href="https://drive.google.com/drive/folders/1TKyjg5C2Jf8KEhy-nbAXiX5KRUpRdp85?usp=drive_link" target="_blank" rel="noopener noreferrer" class="btn">View Document</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- What Is Academic Paper Section -->
+        <section id="what-is" class="content-section bg-light">
+            <div class="container">
+                <h2>❓ What Is Academic Writing?</h2>
+                 <p>Academic writing is a formal style of writing used in universities and scholarly publications. It is characterized by:</p>
+                <ul>
+                    <li><strong>Clear Focus:</strong> Addressing a specific question or topic.</li>
+                    <li><strong>Evidence-Based Arguments:</strong> Claims supported by credible sources.</li>
+                    <li><strong>Formal Tone & Style:</strong> Objective language, precise vocabulary, avoiding slang or colloquialisms.</li>
+                    <li><strong>Logical Structure:</strong> Coherent organization, often including an introduction, body paragraphs, and conclusion.</li>
+                    <li><strong>Proper Citation:</strong> Acknowledging sources to avoid plagiarism.</li>
+                </ul>
+                 <p>It serves to communicate complex ideas, research findings, and critical analysis within a specific academic community.</p>
+            </div>
+        </section>
+
+        <!-- Types of Academic Papers Section -->
+        <section id="types" class="content-section">
+            <div class="container">
+                <h2>📚 Types of Academic Papers</h2>
+                 <p>Academic writing encompasses various forms, each with its specific purpose and structure. Common types include:</p>
+                <ul>
+                    <li><strong>Essay:</strong> Presents an argument or explores a topic (e.g., argumentative, expository, analytical).</li>
+                    <li><strong>Research Paper:</strong> In-depth investigation of a topic using primary and/or secondary sources.</li>
+                    <li><strong>Case Study:</strong> Detailed examination of a specific individual, group, event, or situation.</li>
+                    <li><strong>Literature Review:</strong> Survey and synthesis of existing scholarly work on a particular subject.</li>
+                    <li><strong>Report:</strong> Factual account of information, findings, or events (e.g., lab report, business report).</li>
+                    <li><strong>Critique/Review:</strong> Critical evaluation of a text, artwork, performance, or theory.</li>
+                    <li><strong>Thesis/Dissertation:</strong> Substantial research project required for advanced degrees.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- How to Write Section -->
+        <section id="how-to" class="content-section bg-light">
+            <div class="container">
+                <h2>✍️ How to Write an Academic Paper: 9 Easy Steps</h2>
+                <p>The writing process may seem complex, but breaking it down into manageable steps can make it achievable.</p>
+                <div class="steps-grid">
+                    <div class="step-item"><span>1</span> Choose a Topic</div>
+                    <div class="step-item"><span>2</span> Formulate Research Question</div>
+                    <div class="step-item"><span>3</span> Read & Make Notes</div>
+                    <div class="step-item"><span>4</span> Formulate Thesis Statement</div>
+                    <div class="step-item"><span>5</span> Gather Evidence/Data</div>
+                    <div class="step-item"><span>6</span> Plan Your Paper (Outline)</div>
+                    <div class="step-item"><span>7</span> Write First Draft</div>
+                    <div class="step-item"><span>8</span> Revise & Edit Draft</div>
+                    <div class="step-item"><span>9</span> Format & Finalize</div>
+                </div>
+                <ol class="steps-list">
+                   <li><strong>Choose a Hot Topic:</strong> Select a subject that is relevant, interesting, and manageable within the scope of your assignment.</li>
+                   <li><strong>Formulate Your Topic as a Research Question:</strong> Turn your broad topic into a specific, focused question that your paper will aim to answer.</li>
+                   <li><strong>Read & Make Notes:</strong> Conduct preliminary research. Identify key sources, read critically, and take organized notes.</li>
+                   <li><strong>Formulate a Thesis Statement:</strong> Develop a clear, concise, and arguable statement that presents your main point or argument in response to your research question.</li>
+                   <li><strong>Get Your Empirical Results/Gather Evidence:</strong> Collect the necessary data or evidence from your sources to support your thesis. This might involve experiments, surveys, or detailed analysis of texts.</li>
+                   <li><strong>Plan Your Paper:</strong> Create a logical outline that organizes your ideas, arguments, and evidence. Include introduction, body paragraphs (with topic sentences), and conclusion.</li>
+                   <li><strong>Write Your Draft:</strong> Expand your outline into a full draft. Focus on getting your ideas down clearly and supporting them with evidence. Don't worry about perfection at this stage.</li>
+                   <li><strong>Revise & Edit the Draft:</strong> Review your draft for clarity, coherence, logic, and strength of argument. Check for errors in grammar, spelling, punctuation, and style. Get feedback if possible.</li>
+                   <li><strong>Format Your Paper:</strong> Ensure your paper adheres to the required citation style (APA, MLA, Chicago, etc.) and formatting guidelines (margins, font, spacing). Proofread one last time.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Structure Section -->
+         <section id="structure" class="content-section">
+            <div class="container">
+                <h2>🏗️ Academic Paper Structure</h2>
+                <p>While structure can vary by paper type and discipline, a common framework includes:</p>
+                <ul class="structure-list">
+                    <li><strong>Abstract (often required for research papers):</strong> A brief summary of the paper's purpose, methods, findings, and conclusions.</li>
+                    <li><strong>Introduction:</strong> Background information, problem statement/research question, thesis statement, and overview of the paper's structure.</li>
+                    <li><strong>Literature Review (sometimes a separate section):</strong> Discussion of relevant existing research.</li>
+                    <li><strong>Methods (common in research papers):</strong> Description of how research was conducted or evidence was gathered.</li>
+                    <li><strong>Results/Findings (common in research papers):</strong> Presentation of the data or findings.</li>
+                    <li><strong>Discussion:</strong> Interpretation of results, analysis of arguments, connection back to the thesis and literature.</li>
+                    <li><strong>Conclusion:</strong> Summary of main points, restatement of thesis (in different words), implications, limitations, and suggestions for future research.</li>
+                    <li><strong>References/Works Cited/Bibliography:</strong> A list of all sources cited in the paper.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Formatting Section -->
+        <section id="formatting" class="content-section bg-light">
+            <div class="container">
+                <h2>📋 Formatting Styles (APA/MLA)</h2>
+                 <p>Proper formatting and citation are crucial in academic writing to give credit to sources and maintain academic integrity. The most common styles include:</p>
+                <div class="formatting-styles">
+                    <div class="style-box">
+                        <h3>APA Format</h3>
+                        <p>APA (American Psychological Association) style is widely used in the social sciences (Psychology, Sociology, Education, Communication, etc.). It emphasizes the date of publication in citations.</p>
+                        <p>Key features: Title page, abstract, in-text citations (Author, Year), References list.</p>
+                        <a href="https://apastyle.apa.org/" target="_blank" rel="noopener noreferrer" class="learn-more-link">Learn More about APA</a>
+                    </div>
+                    <div class="style-box">
+                        <h3>MLA Format</h3>
+                        <p>MLA (Modern Language Association) style is predominantly used in the humanities (Literature, Arts, Languages, Philosophy, Religion, etc.). It emphasizes the author's name.</p>
+                        <p>Key features: No separate title page (usually), in-text citations (Author Page#), Works Cited list.</p>
+                        <a href="https://style.mla.org/" target="_blank" rel="noopener noreferrer" class="learn-more-link">Learn More about MLA</a>
+                    </div>
+                </div>
+                 <p>Other styles like Chicago/Turabian, Harvard, AMA, ACS, etc., are used in specific disciplines. Always follow the guidelines provided by your instructor or publication.</p>
+            </div>
+        </section>
+
+
+        <!-- FAQs Section -->
+        <section id="faqs" class="content-section">
+            <div class="container">
+                <h2>💡 Academic Paper FAQs</h2>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>How do I start an academic paper?</summary>
+                        <p>Start by thoroughly understanding the assignment prompt. Choose a topic that interests you and is manageable. Formulate a specific research question and conduct preliminary research to see if sufficient resources are available. Develop a working thesis statement and create a basic outline before you start writing.</p>
+                    </details>
+                     <details class="faq-item">
+                        <summary>What makes a good academic paper?</summary>
+                        <p>A good academic paper has a clear purpose and a strong, arguable thesis. It presents a well-structured, logical argument supported by credible evidence from scholarly sources. The writing is clear, concise, formal, and objective. Proper citation and formatting according to the required style are also essential.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What are the main parts of an academic paper?</summary>
+                        <p>Most academic papers include an introduction (with a thesis statement), body paragraphs (each focusing on a specific point with supporting evidence), and a conclusion (summarizing the argument and offering final thoughts). Research papers often have additional sections like Abstract, Literature Review, Methods, Results, and Discussion.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How do I properly cite sources?</summary>
+                        <p>Follow the specific citation style guide (APA, MLA, Chicago, etc.) required for your assignment. This involves two parts: brief in-text citations within your paper whenever you quote, paraphrase, or summarize information from a source, and a comprehensive list of all cited sources (References, Works Cited, Bibliography) at the end of your paper.</p>
+                    </details>
+                     <details class="faq-item">
+                        <summary>Why is revising and editing important?</summary>
+                        <p>Revision focuses on improving the content and structure of your paper – clarity of argument, logical flow, strength of evidence, and overall coherence. Editing focuses on correcting errors in grammar, punctuation, spelling, sentence structure, and formatting. Both are crucial for producing a polished, professional, and effective academic paper.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact" class="site-footer">
+        <div class="container">
+            <p>Interested in collaborating or have questions about my work?</p>
+            <p>Contact me: <a href="mailto:your.email@example.com">your.email@example.com</a> | <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+            <p>© <span id="year"></span> Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            // Close mobile menu when clicking on a nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenuToggle.classList.remove('active');
+                    mainNav.classList.remove('active');
+                });
+            });
+            
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
